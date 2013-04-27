@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A0141B3283C34419A50C84D6 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 013AB17147B94D7AA613FE2C /* libPods.a */; };
 		DA3EBC86172C4092000013C3 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA3EBC85172C4092000013C3 /* UIKit.framework */; };
 		DA3EBC88172C4092000013C3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA3EBC87172C4092000013C3 /* Foundation.framework */; };
 		DA3EBC8A172C4092000013C3 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA3EBC89172C4092000013C3 /* CoreGraphics.framework */; };
@@ -21,6 +22,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		013AB17147B94D7AA613FE2C /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		44A246BCE88A4204A66B9256 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 		DA3EBC82172C4092000013C3 /* Weather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Weather.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA3EBC85172C4092000013C3 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		DA3EBC87172C4092000013C3 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -48,6 +51,7 @@
 				DA3EBC86172C4092000013C3 /* UIKit.framework in Frameworks */,
 				DA3EBC88172C4092000013C3 /* Foundation.framework in Frameworks */,
 				DA3EBC8A172C4092000013C3 /* CoreGraphics.framework in Frameworks */,
+				A0141B3283C34419A50C84D6 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -61,6 +65,7 @@
 				DA3EBC8B172C4092000013C3 /* Weather */,
 				DA3EBC84172C4092000013C3 /* Frameworks */,
 				DA3EBC83172C4092000013C3 /* Products */,
+				44A246BCE88A4204A66B9256 /* Pods.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -78,6 +83,7 @@
 				DA3EBC85172C4092000013C3 /* UIKit.framework */,
 				DA3EBC87172C4092000013C3 /* Foundation.framework */,
 				DA3EBC89172C4092000013C3 /* CoreGraphics.framework */,
+				013AB17147B94D7AA613FE2C /* libPods.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -118,6 +124,7 @@
 				DA3EBC7E172C4092000013C3 /* Sources */,
 				DA3EBC7F172C4092000013C3 /* Frameworks */,
 				DA3EBC80172C4092000013C3 /* Resources */,
+				93CE585149454618B46FE9D4 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -169,6 +176,23 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		93CE585149454618B46FE9D4 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		DA3EBC7E172C4092000013C3 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -218,7 +242,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -242,7 +266,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -252,6 +276,7 @@
 		};
 		DA3EBCA0172C4092000013C3 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 44A246BCE88A4204A66B9256 /* Pods.xcconfig */;
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Weather/Weather-Prefix.pch";
@@ -264,6 +289,7 @@
 		};
 		DA3EBCA1172C4092000013C3 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 44A246BCE88A4204A66B9256 /* Pods.xcconfig */;
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Weather/Weather-Prefix.pch";
