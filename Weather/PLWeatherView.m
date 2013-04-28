@@ -68,6 +68,8 @@
         self.iconLabel.text = @"\U0000F221";
     } else if ([self.icon isEqualToString:@"rainynight"]) {
         self.iconLabel.text = @"\U0000F226";
+    } else if ([self.icon isEqualToString:@"rainyday"]) {
+        self.iconLabel.text = @"\U0000F225";
     } else {
         self.iconLabel.text = @"";
     }
