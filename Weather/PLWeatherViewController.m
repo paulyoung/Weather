@@ -51,7 +51,7 @@
         self.locationManager.delegate = self;
         [self.locationManager startMonitoringSignificantLocationChanges];
         
-        self.weatherView = [[PLWeatherView alloc] initWithFrame:self.view.frame];
+        self.weatherView = [[PLWeatherView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
         [self.view addSubview:self.weatherView];
     }
     return self;
