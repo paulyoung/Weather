@@ -25,7 +25,7 @@
     PLWeatherViewController *weatherViewController = [[PLWeatherViewController alloc] init];
     self.window.rootViewController = weatherViewController;
     
-    self.window.backgroundColor = [UIColor whiteColor];
+    self.window.backgroundColor = [UIColor blackColor];
     [self.window makeKeyAndVisible];
     return YES;
 }

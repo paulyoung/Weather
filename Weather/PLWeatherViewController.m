@@ -25,7 +25,6 @@
 @property (nonatomic, assign) NSInteger numHours;
 @property (nonatomic, assign) NSInteger tempForecastIndex;
 @property (nonatomic, retain) PLWeatherView *weatherView;
-
 @property (nonatomic, assign) CGFloat tempWeatherViewY;
 
 @end
@@ -48,7 +47,7 @@
                                                      name:@"DidRetrieveHourlyForecastNotification"
                                                    object:nil];
         
-        self.view.backgroundColor = [UIColor colorWithRed:192.0/255.0 green:228.0/255.0 blue:254.0/255.0 alpha:1];
+        [self updateBackgroundColorWithAlpha:1];
         
         self.forecastRetrieved = NO;
         self.numHours = 24;
@@ -220,7 +219,18 @@
         self.weatherView.icon = self.hourlyForecast[index][@"icon"];
         
         NSInteger hour = [self.hourlyForecast[index][@"FCTTIME"][@"hour"] intValue];
-
+        
+        //CGFloat a = -0.00694444;
+        //CGFloat b = 0.166667;
+        //CGFloat c = 0.00000000000000850251;
+        
+        CGFloat a = -0.00555556;
+        CGFloat b = 0.133333;
+        CGFloat c = 0.1;
+        
+        CGFloat alpha = (a * hour * hour) + (b * hour) + c;
+        [self updateBackgroundColorWithAlpha:alpha];
+        
         self.weatherView.time = self.hourlyForecast[index][@"FCTTIME"][@"civil"];
         NSInteger day = [self.hourlyForecast[index][@"FCTTIME"][@"mday"] intValue];
         
@@ -258,6 +268,11 @@
         
         [self.weatherView update];
     }
+}
+
+- (void)updateBackgroundColorWithAlpha:(CGFloat)alpha
+{
+    self.view.backgroundColor = [UIColor colorWithRed:192.0/255.0 green:228.0/255.0 blue:254.0/255.0 alpha:alpha];
 }
 
 - (void)setNetworkActivityIndicatorVisible:(BOOL)visible
