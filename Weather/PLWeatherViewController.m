@@ -90,12 +90,7 @@
 
 - (void)handleLocation:(CLLocation *)location
 {
-    NSDate *eventDate = location.timestamp;
-    NSTimeInterval howRecent = [eventDate timeIntervalSinceNow];
-    
-    if (abs(howRecent) < 15.0) {
-        [self determineLocationForLatitude:location.coordinate.latitude longitude:location.coordinate.longitude];
-    }
+    [self determineLocationForLatitude:location.coordinate.latitude longitude:location.coordinate.longitude];
 }
 
 - (void)determineLocationForLatitude:(double)latitude longitude:(double)longitude
@@ -173,7 +168,7 @@
     [self showForecastWithIndexOffset:hour];
     
     CGRect frame = self.weatherView.frame;
-    CGFloat yPos = self.tempWeatherViewY + (distance / 2);
+    CGFloat yPos = self.tempWeatherViewY + (distance * ((self.view.frame.size.height - self.weatherView.frame.size.height) / self.view.frame.size.height));
     
     if (yPos < 0) {
         yPos = 0;
