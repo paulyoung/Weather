@@ -7,7 +7,10 @@
 //
 
 #import "PLWeatherViewController.h"
+
 #import "AFNetworking.h"
+#import "PLWeatherView.h"
+
 
 @interface PLWeatherViewController ()
 @property (nonatomic, retain) CLLocationManager *locationManager;
@@ -20,10 +23,7 @@
 @property (nonatomic, assign) BOOL forecastRetrieved;
 @property (nonatomic, assign) NSInteger numHours;
 @property (nonatomic, assign) NSInteger tempForecastIndex;
-
-@property (nonatomic, assign) NSInteger temperature;
-@property (nonatomic, retain) NSString *time;
-@property (nonatomic, retain) NSString *icon;
+@property (nonatomic, retain) PLWeatherView *weatherView;
 @end
 
 @implementation PLWeatherViewController
@@ -50,6 +50,9 @@
         self.locationManager = [[CLLocationManager alloc] init];
         self.locationManager.delegate = self;
         [self.locationManager startMonitoringSignificantLocationChanges];
+        
+        self.weatherView = [[PLWeatherView alloc] initWithFrame:self.view.frame];
+        [self.view addSubview:self.weatherView];
     }
     return self;
 }
@@ -199,18 +202,18 @@
 
         self.tempForecastIndex = index;
         
-        self.temperature = [self.hourlyForecast[index][@"temp"][@"english"] intValue];
-        self.icon = self.hourlyForecast[index][@"icon"];
+        self.weatherView.temperature = [self.hourlyForecast[index][@"temp"][@"english"] intValue];
+        self.weatherView.icon = self.hourlyForecast[index][@"icon"];
         
         NSInteger hour = [self.hourlyForecast[index][@"FCTTIME"][@"hour"] intValue];
 
-        self.time = self.hourlyForecast[index][@"FCTTIME"][@"civil"];
+        self.weatherView.time = self.hourlyForecast[index][@"FCTTIME"][@"civil"];
         NSInteger day = [self.hourlyForecast[index][@"FCTTIME"][@"mday"] intValue];
         
         if (hour >= 19 || hour < 6) {
-            self.icon = [NSString stringWithFormat:@"%@night", self.icon];
+            self.weatherView.icon = [NSString stringWithFormat:@"%@night", self.weatherView.icon];
         } else if (hour < 19 && hour >= 6) {
-            self.icon = [NSString stringWithFormat:@"%@day", self.icon];
+            self.weatherView.icon = [NSString stringWithFormat:@"%@day", self.weatherView.icon];
         }
         
         NSDate *now = [[NSDate alloc] init];
@@ -218,25 +221,28 @@
         NSDateComponents *components = [calendar components:NSDayCalendarUnit fromDate:now];
         NSInteger currentDay = [components day];
         
-        if (currentDay == day) {
-            self.time = [NSString stringWithFormat:@"Today %@", self.time];
+        if (index == 0) {
+            self.weatherView.time = @"Now";
         } else {
-            self.time = [NSString stringWithFormat:@"Tomorrow %@", self.time];
+            if (currentDay == day) {
+                self.weatherView.time = [NSString stringWithFormat:@"Today %@", self.weatherView.time];
+            } else {
+                self.weatherView.time = [NSString stringWithFormat:@"Tomorrow %@", self.weatherView.time];
+            }
         }
         
-        self.icon = [self.icon stringByReplacingOccurrencesOfString:@"rain" withString:@"rainy"];
-        self.icon = [self.icon stringByReplacingOccurrencesOfString:@"mostly" withString:@"partly"];
-        self.icon = [self.icon stringByReplacingOccurrencesOfString:@"clearnight" withString:@"moon"];
-        self.icon = [self.icon stringByReplacingOccurrencesOfString:@"clearday" withString:@"clear"];
-        self.icon = [self.icon stringByReplacingOccurrencesOfString:@"partlycloudyday" withString:@"partlycloudy"];
-        self.icon = [self.icon stringByReplacingOccurrencesOfString:@"partlycloudynight" withString:@"cloudynight"];
-        self.icon = [self.icon stringByReplacingOccurrencesOfString:@"tstormsnight" withString:@"rainynight"];
-        self.icon = [self.icon stringByReplacingOccurrencesOfString:@"chance" withString:@""];
+        self.weatherView.icon = [self.weatherView.icon stringByReplacingOccurrencesOfString:@"rain" withString:@"rainy"];
+        self.weatherView.icon = [self.weatherView.icon stringByReplacingOccurrencesOfString:@"mostly" withString:@"partly"];
+        self.weatherView.icon = [self.weatherView.icon stringByReplacingOccurrencesOfString:@"clearnight" withString:@"moon"];
+        self.weatherView.icon = [self.weatherView.icon stringByReplacingOccurrencesOfString:@"clearday" withString:@"clear"];
+        self.weatherView.icon = [self.weatherView.icon stringByReplacingOccurrencesOfString:@"partlycloudyday" withString:@"partlycloudy"];
+        self.weatherView.icon = [self.weatherView.icon stringByReplacingOccurrencesOfString:@"partlycloudynight" withString:@"cloudynight"];
+        self.weatherView.icon = [self.weatherView.icon stringByReplacingOccurrencesOfString:@"tstormsnight" withString:@"rainynight"];
+        self.weatherView.icon = [self.weatherView.icon stringByReplacingOccurrencesOfString:@"chance" withString:@""];
         
-        self.time = [self.time stringByReplacingOccurrencesOfString:@":00" withString:@""];
+        self.weatherView.time = [self.weatherView.time stringByReplacingOccurrencesOfString:@":00" withString:@""];
         
-        NSLog(@"%@", self.icon);
-        NSLog(@"%@", self.time);
+        [self.weatherView update];
     }
 }
 

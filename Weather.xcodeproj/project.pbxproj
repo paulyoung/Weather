@@ -19,6 +19,8 @@
 		DA3EBC9C172C4092000013C3 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA3EBC9B172C4092000013C3 /* Default-568h@2x.png */; };
 		DA3EBCA3172C40B7000013C3 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA3EBCA2172C40B7000013C3 /* CoreLocation.framework */; };
 		DA3EBCA6172C4193000013C3 /* PLWeatherViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA3EBCA5172C4193000013C3 /* PLWeatherViewController.m */; };
+		DA7A36FC172CAD0F002B0B27 /* PLWeatherView.m in Sources */ = {isa = PBXBuildFile; fileRef = DA7A36FB172CAD0F002B0B27 /* PLWeatherView.m */; };
+		DA7A36FE172CB414002B0B27 /* PTS55F.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DA7A36FD172CB414002B0B27 /* PTS55F.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +42,9 @@
 		DA3EBCA2172C40B7000013C3 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		DA3EBCA4172C4193000013C3 /* PLWeatherViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLWeatherViewController.h; sourceTree = "<group>"; };
 		DA3EBCA5172C4193000013C3 /* PLWeatherViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLWeatherViewController.m; sourceTree = "<group>"; };
+		DA7A36FA172CAD0F002B0B27 /* PLWeatherView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLWeatherView.h; sourceTree = "<group>"; };
+		DA7A36FB172CAD0F002B0B27 /* PLWeatherView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLWeatherView.m; sourceTree = "<group>"; };
+		DA7A36FD172CB414002B0B27 /* PTS55F.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = PTS55F.ttf; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +101,8 @@
 				DA3EBC8C172C4092000013C3 /* Supporting Files */,
 				DA3EBCA4172C4193000013C3 /* PLWeatherViewController.h */,
 				DA3EBCA5172C4193000013C3 /* PLWeatherViewController.m */,
+				DA7A36FA172CAD0F002B0B27 /* PLWeatherView.h */,
+				DA7A36FB172CAD0F002B0B27 /* PLWeatherView.m */,
 			);
 			path = Weather;
 			sourceTree = "<group>";
@@ -103,6 +110,7 @@
 		DA3EBC8C172C4092000013C3 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				DA7A36FD172CB414002B0B27 /* PTS55F.ttf */,
 				DA3EBC8D172C4092000013C3 /* Weather-Info.plist */,
 				DA3EBC8E172C4092000013C3 /* InfoPlist.strings */,
 				DA3EBC91172C4092000013C3 /* main.m */,
@@ -171,6 +179,7 @@
 				DA3EBC98172C4092000013C3 /* Default.png in Resources */,
 				DA3EBC9A172C4092000013C3 /* Default@2x.png in Resources */,
 				DA3EBC9C172C4092000013C3 /* Default-568h@2x.png in Resources */,
+				DA7A36FE172CB414002B0B27 /* PTS55F.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -201,6 +210,7 @@
 				DA3EBC92172C4092000013C3 /* main.m in Sources */,
 				DA3EBC96172C4092000013C3 /* PLAppDelegate.m in Sources */,
 				DA3EBCA6172C4193000013C3 /* PLWeatherViewController.m in Sources */,
+				DA7A36FC172CAD0F002B0B27 /* PLWeatherView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
