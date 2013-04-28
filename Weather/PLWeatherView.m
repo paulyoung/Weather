@@ -8,9 +8,14 @@
 
 #import "PLWeatherView.h"
 
+#import <CoreText/CoreText.h>
+
 @interface PLWeatherView ()
+
+@property (nonatomic, retain) UILabel *iconLabel;
 @property (nonatomic, retain) UILabel *temperatureLabel;
 @property (nonatomic, retain) UILabel *timeLabel;
+
 @end
 
 @implementation PLWeatherView
@@ -31,6 +36,12 @@
         self.timeLabel.textColor = [UIColor whiteColor];
         self.timeLabel.backgroundColor = [UIColor clearColor];
         [self addSubview:self.timeLabel];
+        
+        self.iconLabel = [[UILabel alloc] initWithFrame:CGRectMake(220, 20, 80, 100)];
+        self.iconLabel.font = [UIFont fontWithName:@"SSForecast" size:80.0];
+        self.iconLabel.textColor = [UIColor whiteColor];
+        self.iconLabel.backgroundColor = [UIColor clearColor];
+        [self addSubview:self.iconLabel];
     }
     return self;
 }
@@ -39,6 +50,27 @@
 {
     self.temperatureLabel.text = [NSString stringWithFormat:@"%d°", self.temperature];
     self.timeLabel.text = self.time;
+    
+    
+    if ([self.icon isEqualToString:@"rainy"]) {
+        self.iconLabel.text = @"\U00002614";
+    } else if ([self.icon isEqualToString:@"partly cloudy"]) {
+        self.iconLabel.text = @"\U000026C5";
+    } else if ([self.icon isEqualToString:@"partly sunny"]) {
+        self.iconLabel.text = @"\U000026C5";
+    } else if ([self.icon isEqualToString:@"moon"]) {
+        self.iconLabel.text = @"\U0001F319";
+    } else if ([self.icon isEqualToString:@"clear"]) {
+        self.iconLabel.text = @"\U00002600";
+    } else if ([self.icon isEqualToString:@"partlycloudy"]) {
+        self.iconLabel.text = @"\U000026C5";
+    } else if ([self.icon isEqualToString:@"cloudynight"]) {
+        self.iconLabel.text = @"\U0000F221";
+    } else if ([self.icon isEqualToString:@"rainynight"]) {
+        self.iconLabel.text = @"\U0000F226";
+    } else {
+        self.iconLabel.text = @"";
+    }
 }
 
 /*

@@ -21,6 +21,7 @@
 		DA3EBCA6172C4193000013C3 /* PLWeatherViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA3EBCA5172C4193000013C3 /* PLWeatherViewController.m */; };
 		DA7A36FC172CAD0F002B0B27 /* PLWeatherView.m in Sources */ = {isa = PBXBuildFile; fileRef = DA7A36FB172CAD0F002B0B27 /* PLWeatherView.m */; };
 		DA7A36FE172CB414002B0B27 /* PTS55F.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DA7A36FD172CB414002B0B27 /* PTS55F.ttf */; };
+		DA7A3700172CC810002B0B27 /* ss-forecast.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DA7A36FF172CC810002B0B27 /* ss-forecast.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,6 +46,7 @@
 		DA7A36FA172CAD0F002B0B27 /* PLWeatherView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLWeatherView.h; sourceTree = "<group>"; };
 		DA7A36FB172CAD0F002B0B27 /* PLWeatherView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLWeatherView.m; sourceTree = "<group>"; };
 		DA7A36FD172CB414002B0B27 /* PTS55F.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = PTS55F.ttf; sourceTree = "<group>"; };
+		DA7A36FF172CC810002B0B27 /* ss-forecast.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ss-forecast.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,6 +112,7 @@
 		DA3EBC8C172C4092000013C3 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				DA7A36FF172CC810002B0B27 /* ss-forecast.ttf */,
 				DA7A36FD172CB414002B0B27 /* PTS55F.ttf */,
 				DA3EBC8D172C4092000013C3 /* Weather-Info.plist */,
 				DA3EBC8E172C4092000013C3 /* InfoPlist.strings */,
@@ -180,6 +183,7 @@
 				DA3EBC9A172C4092000013C3 /* Default@2x.png in Resources */,
 				DA3EBC9C172C4092000013C3 /* Default-568h@2x.png in Resources */,
 				DA7A36FE172CB414002B0B27 /* PTS55F.ttf in Resources */,
+				DA7A3700172CC810002B0B27 /* ss-forecast.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
