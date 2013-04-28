@@ -20,8 +20,6 @@
     self = [super initWithFrame:frame];
     if (self) {
         // Initialization code
-        self.backgroundColor = [UIColor colorWithRed:192.0/255.0 green:228.0/255.0 blue:254.0/255.0 alpha:1];
-        
         self.temperatureLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 20, 210, 100)];
         self.temperatureLabel.font = [UIFont fontWithName:@"PT Sans" size:100.0];
         self.temperatureLabel.textColor = [UIColor whiteColor];

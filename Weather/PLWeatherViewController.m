@@ -13,6 +13,7 @@
 
 
 @interface PLWeatherViewController ()
+
 @property (nonatomic, retain) CLLocationManager *locationManager;
 @property (nonatomic, retain) NSString *city;
 @property (nonatomic, retain) NSString *state;
@@ -24,6 +25,9 @@
 @property (nonatomic, assign) NSInteger numHours;
 @property (nonatomic, assign) NSInteger tempForecastIndex;
 @property (nonatomic, retain) PLWeatherView *weatherView;
+
+@property (nonatomic, assign) CGFloat tempWeatherViewY;
+
 @end
 
 @implementation PLWeatherViewController
@@ -44,6 +48,8 @@
                                                      name:@"DidRetrieveHourlyForecastNotification"
                                                    object:nil];
         
+        self.view.backgroundColor = [UIColor colorWithRed:192.0/255.0 green:228.0/255.0 blue:254.0/255.0 alpha:1];
+        
         self.forecastRetrieved = NO;
         self.numHours = 24;
         
@@ -51,7 +57,7 @@
         self.locationManager.delegate = self;
         [self.locationManager startMonitoringSignificantLocationChanges];
         
-        self.weatherView = [[PLWeatherView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
+        self.weatherView = [[PLWeatherView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 150)];
         [self.view addSubview:self.weatherView];
     }
     return self;
@@ -155,15 +161,28 @@
 {
     CGPoint nowPoint = [touches.anyObject locationInView:self.view];
     self.touchStart = nowPoint.y;
+    self.tempWeatherViewY = self.weatherView.frame.origin.y;
 }
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
 {
     CGPoint nowPoint = [touches.anyObject locationInView:self.view];
     NSInteger distance = nowPoint.y - self.touchStart;
+    
     NSInteger hour = [self getHourOffsetForDistance:distance];
-    //NSLog(@"hour: %d", hour);
     [self showForecastWithIndexOffset:hour];
+    
+    CGRect frame = self.weatherView.frame;
+    CGFloat yPos = self.tempWeatherViewY + (distance / 2);
+    
+    if (yPos < 0) {
+        yPos = 0;
+    } else if (yPos > self.view.frame.size.height - self.weatherView.frame.size.height) {
+        yPos = self.view.frame.size.height - self.weatherView.frame.size.height;
+    }
+    
+    frame.origin.y = yPos;
+    self.weatherView.frame = frame;
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
