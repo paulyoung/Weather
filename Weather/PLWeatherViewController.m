@@ -14,18 +14,18 @@
 
 @interface PLWeatherViewController ()
 
-@property (nonatomic, retain) CLLocationManager *locationManager;
 @property (nonatomic, retain) NSString *city;
-@property (nonatomic, retain) NSString *state;
-@property (nonatomic, retain) NSArray *hourlyForecast;
-@property (nonatomic, assign) CGFloat touchStart;
-@property (nonatomic, assign) CGFloat touchEnd;
 @property (nonatomic, assign) NSInteger forecastIndex;
 @property (nonatomic, assign) BOOL forecastRetrieved;
+@property (nonatomic, retain) NSArray *hourlyForecast;
+@property (nonatomic, retain) CLLocationManager *locationManager;
 @property (nonatomic, assign) NSInteger numHours;
+@property (nonatomic, retain) NSString *state;
 @property (nonatomic, assign) NSInteger tempForecastIndex;
-@property (nonatomic, retain) PLWeatherView *weatherView;
 @property (nonatomic, assign) CGFloat tempWeatherViewY;
+@property (nonatomic, assign) CGFloat touchEnd;
+@property (nonatomic, assign) CGFloat touchStart;
+@property (nonatomic, retain) PLWeatherView *weatherView;
 
 @end
 
@@ -49,15 +49,12 @@
         
         [self updateBackgroundColorWithAlpha:1];
         
-        self.forecastRetrieved = NO;
-        self.numHours = 24;
+        _forecastRetrieved = NO;
+        _numHours = 24;
         
-        self.locationManager = [[CLLocationManager alloc] init];
-        self.locationManager.delegate = self;
-        [self.locationManager startMonitoringSignificantLocationChanges];
-        
-        self.weatherView = [[PLWeatherView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 150)];
-        [self.view addSubview:self.weatherView];
+        _locationManager = [[CLLocationManager alloc] init];
+        _locationManager.delegate = self;
+        [_locationManager startMonitoringSignificantLocationChanges];
     }
     return self;
 }
@@ -66,6 +63,8 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    self.weatherView = [[[PLWeatherView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 150)] autorelease];
+    [self.view addSubview:self.weatherView];
 }
 
 - (void)didReceiveMemoryWarning
@@ -125,6 +124,8 @@
 {
     NSString *encodedCity = (NSString *)CFURLCreateStringByAddingPercentEscapes(NULL, (CFStringRef)city, NULL, (CFStringRef)@"!*'();:@&=+$,/?%#[]", kCFStringEncodingUTF8);
     NSString *urlString = [NSString stringWithFormat:@"http://api.wunderground.com/api/d693c724ca3eb165/hourly/q/%@/%@.json", state, encodedCity];
+    [encodedCity release];
+    
     NSURL *url = [NSURL URLWithString:urlString];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     
@@ -215,8 +216,8 @@
 
         self.tempForecastIndex = index;
         
-        self.weatherView.temperature = [self.hourlyForecast[index][@"temp"][@"english"] intValue];
-        self.weatherView.icon = self.hourlyForecast[index][@"icon"];
+        NSInteger temperature = [self.hourlyForecast[index][@"temp"][@"english"] intValue];
+        NSString *icon = self.hourlyForecast[index][@"icon"];
         
         NSInteger hour = [self.hourlyForecast[index][@"FCTTIME"][@"hour"] intValue];
         
@@ -231,42 +232,44 @@
         CGFloat alpha = (a * hour * hour) + (b * hour) + c;
         [self updateBackgroundColorWithAlpha:alpha];
         
-        self.weatherView.time = self.hourlyForecast[index][@"FCTTIME"][@"civil"];
+        NSString *time = self.hourlyForecast[index][@"FCTTIME"][@"civil"];
         NSInteger day = [self.hourlyForecast[index][@"FCTTIME"][@"mday"] intValue];
         
         if (hour >= 19 || hour < 6) {
-            self.weatherView.icon = [NSString stringWithFormat:@"%@night", self.weatherView.icon];
+            icon = [NSString stringWithFormat:@"%@night", icon];
         } else if (hour < 19 && hour >= 6) {
-            self.weatherView.icon = [NSString stringWithFormat:@"%@day", self.weatherView.icon];
+            icon = [NSString stringWithFormat:@"%@day", icon];
         }
         
         NSDate *now = [[NSDate alloc] init];
         NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
         NSDateComponents *components = [calendar components:NSDayCalendarUnit fromDate:now];
+        [now release];
+        [calendar release];
         NSInteger currentDay = [components day];
         
         if (index == 0) {
-            self.weatherView.time = @"Now";
+            time = @"Now";
         } else {
             if (currentDay == day) {
-                self.weatherView.time = [NSString stringWithFormat:@"Today %@", self.weatherView.time];
+                time = [NSString stringWithFormat:@"Today %@", time];
             } else {
-                self.weatherView.time = [NSString stringWithFormat:@"Tomorrow %@", self.weatherView.time];
+                time = [NSString stringWithFormat:@"Tomorrow %@", time];
             }
         }
         
-        self.weatherView.icon = [self.weatherView.icon stringByReplacingOccurrencesOfString:@"rain" withString:@"rainy"];
-        self.weatherView.icon = [self.weatherView.icon stringByReplacingOccurrencesOfString:@"mostly" withString:@"partly"];
-        self.weatherView.icon = [self.weatherView.icon stringByReplacingOccurrencesOfString:@"clearnight" withString:@"moon"];
-        self.weatherView.icon = [self.weatherView.icon stringByReplacingOccurrencesOfString:@"clearday" withString:@"clear"];
-        self.weatherView.icon = [self.weatherView.icon stringByReplacingOccurrencesOfString:@"partlycloudyday" withString:@"partlycloudy"];
-        self.weatherView.icon = [self.weatherView.icon stringByReplacingOccurrencesOfString:@"partlycloudynight" withString:@"cloudynight"];
-        self.weatherView.icon = [self.weatherView.icon stringByReplacingOccurrencesOfString:@"tstormsnight" withString:@"rainynight"];
-        self.weatherView.icon = [self.weatherView.icon stringByReplacingOccurrencesOfString:@"chance" withString:@""];
+        icon = [icon stringByReplacingOccurrencesOfString:@"rain" withString:@"rainy"];
+        icon = [icon stringByReplacingOccurrencesOfString:@"mostly" withString:@"partly"];
+        icon = [icon stringByReplacingOccurrencesOfString:@"clearnight" withString:@"moon"];
+        icon = [icon stringByReplacingOccurrencesOfString:@"clearday" withString:@"clear"];
+        icon = [icon stringByReplacingOccurrencesOfString:@"partlycloudyday" withString:@"partlycloudy"];
+        icon = [icon stringByReplacingOccurrencesOfString:@"partlycloudynight" withString:@"cloudynight"];
+        icon = [icon stringByReplacingOccurrencesOfString:@"tstormsnight" withString:@"rainynight"];
+        icon = [icon stringByReplacingOccurrencesOfString:@"chance" withString:@""];
         
-        self.weatherView.time = [self.weatherView.time stringByReplacingOccurrencesOfString:@":00" withString:@""];
+        time = [time stringByReplacingOccurrencesOfString:@":00" withString:@""];
         
-        [self.weatherView update];
+        [self.weatherView updateWithTemperature:temperature time:time icon:icon];
     }
 }
 
@@ -278,6 +281,16 @@
 - (void)setNetworkActivityIndicatorVisible:(BOOL)visible
 {
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:visible];
+}
+
+- (void)dealloc
+{
+    [_city release];
+    [_hourlyForecast release];
+    [_locationManager release];
+    [_state release];
+    [_weatherView release];
+    [super dealloc];
 }
 
 @end

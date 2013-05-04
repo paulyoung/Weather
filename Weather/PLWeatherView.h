@@ -10,10 +10,6 @@
 
 @interface PLWeatherView : UIView
 
-@property (nonatomic, assign) NSInteger temperature;
-@property (nonatomic, retain) NSString *time;
-@property (nonatomic, retain) NSString *icon;
-
-- (void)update;
+- (void)updateWithTemperature:(NSInteger)temperature time:(NSString *)time icon:(NSString *)icon;
 
 @end

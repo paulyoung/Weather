@@ -24,6 +24,7 @@
     // Override point for customization after application launch.
     PLWeatherViewController *weatherViewController = [[PLWeatherViewController alloc] init];
     self.window.rootViewController = weatherViewController;
+    [weatherViewController release];
     
     self.window.backgroundColor = [UIColor blackColor];
     [self.window makeKeyAndVisible];

@@ -25,50 +25,50 @@
     self = [super initWithFrame:frame];
     if (self) {
         // Initialization code
-        self.temperatureLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 20, 210, 100)];
-        self.temperatureLabel.font = [UIFont fontWithName:@"PT Sans" size:100.0];
-        self.temperatureLabel.textColor = [UIColor whiteColor];
-        self.temperatureLabel.backgroundColor = [UIColor clearColor];
-        [self addSubview:self.temperatureLabel];
+        _temperatureLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 20, 210, 100)];
+        _temperatureLabel.font = [UIFont fontWithName:@"PT Sans" size:100.0];
+        _temperatureLabel.textColor = [UIColor whiteColor];
+        _temperatureLabel.backgroundColor = [UIColor clearColor];
+        [self addSubview:_temperatureLabel];
         
-        self.timeLabel = [[UILabel alloc] initWithFrame:CGRectMake(18, 100, 200, 40)];
-        self.timeLabel.font = [UIFont fontWithName:@"PT Sans" size:18.0];
-        self.timeLabel.textColor = [UIColor whiteColor];
-        self.timeLabel.backgroundColor = [UIColor clearColor];
-        [self addSubview:self.timeLabel];
+        _timeLabel = [[UILabel alloc] initWithFrame:CGRectMake(18, 100, 200, 40)];
+        _timeLabel.font = [UIFont fontWithName:@"PT Sans" size:18.0];
+        _timeLabel.textColor = [UIColor whiteColor];
+        _timeLabel.backgroundColor = [UIColor clearColor];
+        [self addSubview:_timeLabel];
         
-        self.iconLabel = [[UILabel alloc] initWithFrame:CGRectMake(220, 20, 80, 100)];
-        self.iconLabel.font = [UIFont fontWithName:@"SSForecast" size:80.0];
-        self.iconLabel.textColor = [UIColor whiteColor];
-        self.iconLabel.backgroundColor = [UIColor clearColor];
-        [self addSubview:self.iconLabel];
+        _iconLabel = [[UILabel alloc] initWithFrame:CGRectMake(220, 20, 80, 100)];
+        _iconLabel.font = [UIFont fontWithName:@"SSForecast" size:80.0];
+        _iconLabel.textColor = [UIColor whiteColor];
+        _iconLabel.backgroundColor = [UIColor clearColor];
+        [self addSubview:_iconLabel];
     }
     return self;
 }
 
-- (void)update
+- (void)updateWithTemperature:(NSInteger)temperature time:(NSString *)time icon:(NSString *)icon
 {
-    self.temperatureLabel.text = [NSString stringWithFormat:@"%d°", self.temperature];
-    self.timeLabel.text = self.time;
+    self.temperatureLabel.text = [NSString stringWithFormat:@"%d°", temperature];
+    self.timeLabel.text = time;
     
     
-    if ([self.icon isEqualToString:@"rainy"]) {
+    if ([icon isEqualToString:@"rainy"]) {
         self.iconLabel.text = @"\U00002614";
-    } else if ([self.icon isEqualToString:@"partly cloudy"]) {
+    } else if ([icon isEqualToString:@"partly cloudy"]) {
         self.iconLabel.text = @"\U000026C5";
-    } else if ([self.icon isEqualToString:@"partly sunny"]) {
+    } else if ([icon isEqualToString:@"partly sunny"]) {
         self.iconLabel.text = @"\U000026C5";
-    } else if ([self.icon isEqualToString:@"moon"]) {
+    } else if ([icon isEqualToString:@"moon"]) {
         self.iconLabel.text = @"\U0001F319";
-    } else if ([self.icon isEqualToString:@"clear"]) {
+    } else if ([icon isEqualToString:@"clear"]) {
         self.iconLabel.text = @"\U00002600";
-    } else if ([self.icon isEqualToString:@"partlycloudy"]) {
+    } else if ([icon isEqualToString:@"partlycloudy"]) {
         self.iconLabel.text = @"\U000026C5";
-    } else if ([self.icon isEqualToString:@"cloudynight"]) {
+    } else if ([icon isEqualToString:@"cloudynight"]) {
         self.iconLabel.text = @"\U0000F221";
-    } else if ([self.icon isEqualToString:@"rainynight"]) {
+    } else if ([icon isEqualToString:@"rainynight"]) {
         self.iconLabel.text = @"\U0000F226";
-    } else if ([self.icon isEqualToString:@"rainyday"]) {
+    } else if ([icon isEqualToString:@"rainyday"]) {
         self.iconLabel.text = @"\U0000F225";
     } else {
         self.iconLabel.text = @"";
@@ -83,5 +83,13 @@
     // Drawing code
 }
 */
+
+- (void)dealloc
+{
+    [_temperatureLabel release];
+    [_timeLabel release];
+    [_iconLabel release];
+    [super dealloc];
+}
 
 @end
