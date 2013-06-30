@@ -122,3 +122,10 @@ xcuserdata
 
 Podfile.lock
 Pods
+
+
+####
+# Fonts
+
+Weather/PTS55F.ttf
+Weather/ss-forecast.ttf
