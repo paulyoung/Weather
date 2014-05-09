@@ -4,7 +4,7 @@ A native implementation of [https://github.com/PermalightNYC/weather](https://gi
 ![Screenshot of Weather app](http://img.youtube.com/vi/xGTZLXT0ubI/hqdefault.jpg)
 
 ## Demo
-View a [demo video](http://paulyoung.me/post/66651020876/weather-yesterday-i-saw-that-my-friend-dan-at).
+View a [demo video](http://paulyoung.me/post/66651020876/weather).
 
 ## Inspiration
 I saw that my friend Dan at [Permalight](http://permalightnyc.com/) had taken a skillshare class on iOS app design.
